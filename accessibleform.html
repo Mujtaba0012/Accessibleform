@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta information for the document -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Accessible Form UI</title>
+
+    <style>
+        /* Global Styles for the body */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Form container styling */
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Animation for form fade-in effect */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Styling for form header */
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #555;
+        }
+
+        /* Form field grouping */
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        /* Label styling */
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        /* Input field styling */
+        .form-group input {
+            width: 95%;
+            padding: 15px 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        /* Focused state styling for input fields */
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Password toggle button styling */
+        .toggle-password {
+            text-align: right;
+            cursor: pointer;
+            color: #007bff;
+            font-size: 14px;
+            position: absolute;
+            top: 65%;
+            right: 15px;
+            transform: translateY(-50%);
+        }
+
+        /* Hover effect for password toggle button */
+        .toggle-password:hover {
+            text-decoration: underline;
+        }
+
+        /* Progress bar container styling */
+        .progress-bar {
+            margin-top: 20px;
+            background: #ec0505;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 14px;
+            position: relative;
+        }
+
+        /* Filling inside the progress bar */
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* List of form requirements */
+        .requirements {
+            margin-top: 20px;
+            font-size: 14px;
+            list-style: none;
+            padding: 0;
+            color: #555;
+        }
+
+        /* Styling for individual list items */
+        .requirements li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Styling for completed requirements (e.g., checks) */
+        .requirements li.completed {
+            color: #28a745;
+        }
+
+        /* Bullet point for requirements list */
+        .requirements li::before {
+            content: '\2022';
+            margin-right: 8px;
+            color: #ccc;
+        }
+
+        /* Styling for completed bullet points */
+        .requirements li.completed::before {
+            content: '\2713';
+            color: #28a745;
+        }
+
+        /* Submit button styling */
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        /* Hover effect for button */
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003d80);
+        }
+
+        /* Focused state styling for button */
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <!-- Form container wrapping the form UI -->
+    <div class="form-container">
+        <!-- Header for the form -->
+        <h1>Register Form</h1>
+        
+        <!-- Form element with aria-label for accessibility -->
+        <form aria-label="Registration Form">
+            <!-- Full Name input field -->
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" aria-required="true" placeholder="Enter your full name">
+            </div>
+
+            <!-- Email input field -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" aria-required="true" placeholder="Enter your email">
+            </div>
+
+            <!-- Password input field with a toggle for showing password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" aria-required="true" placeholder="Create a password">
+                <span class="toggle-password" tabindex="0" role="button" aria-pressed="false">Show</span>
+            </div>
+
+            <!-- Confirm Password input field -->
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" aria-required="true" placeholder="Confirm your password">
+            </div>
+
+            <!-- Progress bar showing form completion -->
+            <div class="progress-bar" aria-label="Form completion progress">
+                <div class="progress-bar-fill"></div>
+            </div>
+
+            <!-- List of form requirements -->
+            <ul class="requirements" aria-label="Form requirements">
+                <li>Full Name is required</li>
+                <li>Email must be valid</li>
+                <li>Password must be at least 8 characters</li>
+                <li>Passwords must match</li>
+            </ul>
+
+            <!-- Submit button -->
+            <button type="button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
